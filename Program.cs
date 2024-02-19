@@ -27,10 +27,13 @@ while (choice != "e")
     e. Exit");
 
     choice = Console.ReadLine();
+
+    // used try block to handle choice logic and catch block to handle exception
     try
     {
         switch (choice)
         {
+            //added NotImplementedException to the case "a" to handle the exception
             case "a":
                 // TODO: Implement feature to display all plants.
                 throw new NotImplementedException("Display all plants");
@@ -52,17 +55,18 @@ while (choice != "e")
                 Console.WriteLine($"Exit");
                 break;
 
+            //!added default case to handle invalid choice
             default:
                 Console.WriteLine($"Invalid Choice: {choice}.");
                 break;
         }
     }
+
+    // Used catch block to handle NotImplementedException
     catch (NotImplementedException ex)
     {
         Console.WriteLine(ex.Message);
     }
-
-
 
 }
 
