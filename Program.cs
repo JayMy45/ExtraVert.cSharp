@@ -1,4 +1,6 @@
 ﻿// See https://aka.ms/new-console-template for more information
+using System.Linq.Expressions;
+
 List<Plant> plants = new List<Plant>()
 {
 new Plant { Species = "Monstera", LightNeeds = 2, AskingPrice = 50.00M, City = "Seattle", ZIP = 37209, Sold = false },
@@ -8,10 +10,59 @@ new Plant { Species = "Snake Plant", LightNeeds = 1, AskingPrice = 25.00M, City 
 new Plant { Species = "Pothos", LightNeeds = 1, AskingPrice = 20.00M, City = "Seattle", ZIP = 37201, Sold = false },
 };
 
-Console.WriteLine(@$"Welcome to ExtraVert!
-Here is a list of our plants:");
+string greeting = @$"Welcome to ExtraVert!
+Here is a list of our plants:";
 
-for (int i = 0; i < plants.Count; i++)
+Console.WriteLine(greeting);
+
+string? choice = null;
+
+while (choice != "e")
 {
-    Console.WriteLine($"{i + 1}. {plants[i].Species}");
+    Console.WriteLine(@$"Select an option:
+    a. Display all Plants
+    b. Post a plant to be adopted
+    c. Adopt a plant
+    d. Delist a plant
+    e. Exit");
+
+    choice = Console.ReadLine();
+    try
+    {
+        switch (choice)
+        {
+            case "a":
+                // TODO: Implement feature to display all plants.
+                throw new NotImplementedException("Display all plants");
+
+            case "b":
+                // TODO: Implement feature to post a plant for adoption.
+                throw new NotImplementedException("Post a plant to be adopted");
+
+            case "c":
+                // TODO: Implement feature to adopt a plant.
+                throw new NotImplementedException("Adopt a plant");
+
+            case "d":
+                // TODO: Implement feature to delist a plant.
+                throw new NotImplementedException("Delist a plant");
+
+            case "e":
+
+                Console.WriteLine($"Exit");
+                break;
+
+            default:
+                Console.WriteLine($"Invalid Choice: {choice}.");
+                break;
+        }
+    }
+    catch (NotImplementedException ex)
+    {
+        Console.WriteLine(ex.Message);
+    }
+
+
+
 }
+
