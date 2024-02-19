@@ -13,6 +13,7 @@ new Plant { Species = "Pothos", LightNeeds = 1, AskingPrice = 20.00M, City = "Se
 string greeting = @$"Welcome to ExtraVert!
 Here is a list of our plants:";
 
+Console.Clear();
 Console.WriteLine(greeting);
 
 string? choice = null;
@@ -36,28 +37,39 @@ while (choice != "e")
             //added NotImplementedException to the case "a" to handle the exception
             case "a":
                 // TODO: Implement feature to display all plants.
-                throw new NotImplementedException("Display all plants");
+                Console.Clear();
+                throw new NotImplementedException("Display all plants \n");
 
             case "b":
                 // TODO: Implement feature to post a plant for adoption.
-                throw new NotImplementedException("Post a plant to be adopted");
+                Console.Clear();
+                throw new NotImplementedException("Post a plant to be adopted \n");
 
             case "c":
                 // TODO: Implement feature to adopt a plant.
-                throw new NotImplementedException("Adopt a plant");
+                Console.Clear();
+                throw new NotImplementedException("Adopt a plant \n");
 
             case "d":
                 // TODO: Implement feature to delist a plant.
-                throw new NotImplementedException("Delist a plant");
+                Console.Clear();
+                throw new NotImplementedException("Delist a plant \n");
 
             case "e":
 
-                Console.WriteLine($"Exit");
+                Console.Clear(); // Clears the console
+                Console.WriteLine("Exiting in 3 seconds...");
+                Thread.Sleep(3000); // Wait for 3000 milliseconds (3 seconds)
+                Console.Clear(); // Clears the console
+
                 break;
 
             //!added default case to handle invalid choice
             default:
-                Console.WriteLine($"Invalid Choice: {choice}.");
+                Console.Clear();
+                Console.WriteLine(@$"Invalid Choice: {choice}
+Please select an option below 
+                ");
                 break;
         }
     }
