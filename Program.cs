@@ -28,6 +28,8 @@ while (choice != "e")
     e. Exit");
 
     choice = Console.ReadLine();
+    Console.WriteLine(@$"Press any key to continue...");
+    Console.ReadKey();
 
     // used try block to handle choice logic and catch block to handle exception
     try
@@ -35,33 +37,26 @@ while (choice != "e")
         switch (choice)
         {
             //added NotImplementedException to the case "a" to handle the exception
-            case "a":
-                // TODO: Implement feature to display all plants.
-                Console.Clear();
-                throw new NotImplementedException("Display all plants \n");
+            case "a" or "A":
+                AllPlants();
+                break;
 
-            case "b":
-                // TODO: Implement feature to post a plant for adoption.
-                Console.Clear();
-                throw new NotImplementedException("Post a plant to be adopted \n");
+            case "b" or "B":
+                PostPlant();
+                break;
 
-            case "c":
-                // TODO: Implement feature to adopt a plant.
-                Console.Clear();
-                throw new NotImplementedException("Adopt a plant \n");
+            case "c" or "C":
 
-            case "d":
-                // TODO: Implement feature to delist a plant.
-                Console.Clear();
-                throw new NotImplementedException("Delist a plant \n");
+                AdoptPlant();
+                break;
 
-            case "e":
+            case "d" or "D":
+                DelistPlant();
+                break;
 
-                Console.Clear(); // Clears the console
-                Console.WriteLine("Exiting in 3 seconds...");
-                Thread.Sleep(3000); // Wait for 3000 milliseconds (3 seconds)
-                Console.Clear(); // Clears the console
+            case "e" or "E":
 
+                ExitMenu();
                 break;
 
             //!added default case to handle invalid choice
@@ -82,3 +77,38 @@ Please select an option below
 
 }
 
+void AllPlants()
+{
+    // TODO: Implement feature to display all plants.
+    Console.Clear();
+    throw new NotImplementedException("Display all plants \n");
+}
+
+void PostPlant()
+{
+    // TODO: Implement feature to post a plant for adoption.
+    Console.Clear();
+    throw new NotImplementedException("Post a plant to be adopted \n");
+}
+
+void AdoptPlant()
+{
+    // TODO: Implement feature to adopt a plant.
+    Console.Clear();
+    throw new NotImplementedException("Adopt a plant \n");
+}
+
+void DelistPlant()
+{
+    // TODO: Implement feature to delist a plant.
+    Console.Clear();
+    throw new NotImplementedException("Delist a plant \n");
+}
+
+void ExitMenu()
+{
+    Console.Clear(); // Clears the console
+    Console.WriteLine("Exiting in 3 seconds...");
+    Thread.Sleep(3000); // Wait for 3000 milliseconds (3 seconds)
+    Console.Clear(); // Clears the console
+}
