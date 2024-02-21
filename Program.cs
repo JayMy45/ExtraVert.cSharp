@@ -1,14 +1,15 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using System.Linq.Expressions;
+using System.Net;
 using System.Text;
 
 List<Plant> plants = new List<Plant>()
 {
-new Plant { Species = "Monstera", LightNeeds = 2, AskingPrice = 50.00M, City = "Seattle", ZIP = 37209, Sold = false },
-new Plant { Species = "Peace Lily", LightNeeds = 1, AskingPrice = 30.00M, City = "Seattle", ZIP = 37201, Sold = true },
-new Plant { Species = "Fiddle Leaf Fig", LightNeeds = 5, AskingPrice = 75.00M, City = "Seattle", ZIP = 37201, Sold = false },
-new Plant { Species = "Snake Plant", LightNeeds = 1, AskingPrice = 25.00M, City = "Seattle", ZIP = 37209, Sold = false },
-new Plant { Species = "Pothos", LightNeeds = 1, AskingPrice = 20.00M, City = "Seattle", ZIP = 37201, Sold = false },
+new Plant { Species = "Monstera", LightNeeds = 2, AskingPrice = 50.00M, City = "Nashville, TN", ZIP = 37209, Sold = false },
+new Plant { Species = "Peace Lily", LightNeeds = 1, AskingPrice = 30.00M, City = "Knoxville, TN", ZIP = 37201, Sold = true },
+new Plant { Species = "Fiddle Leaf Fig", LightNeeds = 5, AskingPrice = 75.00M, City = "Memphis, TN", ZIP = 37201, Sold = false },
+new Plant { Species = "Snake Plant", LightNeeds = 1, AskingPrice = 25.00M, City = "Lebanon, TN", ZIP = 37209, Sold = false },
+new Plant { Species = "Pothos", LightNeeds = 1, AskingPrice = 20.00M, City = "Asheville, TN", ZIP = 37201, Sold = false },
 };
 
 string greeting = @$"Welcome to ExtraVert!
@@ -144,20 +145,109 @@ void PostPlant()
     // Sold = Console.ReadLine();
     Console.Clear();
     Console.WriteLine(newPlant);
-    Console.WriteLine($"\n Press any key to continue...");
+    Console.WriteLine($"\n Press any key to continue to post new plant...");
     Console.ReadKey();
 
     plants.Add(newPlant);
-    Console.WriteLine("Plant added successfully!");
     Console.Clear();
+    Console.WriteLine("Plant added successfully!");
 
 }
 
 void AdoptPlant()
 {
     // TODO: Implement feature to adopt a plant.
+    /*
+    Provide a list of plants that are available for adoption
+        - create a list of available plants
+        - use foreach loop to iterate through the list of plants
+        - add plants that are not sold to the list of available plants List<Plant> availablePlants
+        - display the list of available plants
+        - user input for plant to adopt using Console.ReadLine();
+        - change Sold to true
+        - display a message that the plant has been adopted
+    */
+
+    List<Plant> availablePlants = new List<Plant>();
+
     Console.Clear();
-    throw new NotImplementedException("Adopt a plant \n");
+    Console.WriteLine("Here is a list of Available Plants: \n");
+
+    //   List<Plant> availablePlants = plants.Where(plant => plant.Sold == false).ToList();
+    foreach (Plant plant in plants)
+    {
+        if (plant.Sold == false)
+        {
+            availablePlants.Add(plant);
+        }
+    }
+
+    for (int i = 0; i < availablePlants.Count; i++)
+    {
+        Console.WriteLine($"{i + 1}. {availablePlants[i].Species}, Cost: {availablePlants[i].AskingPrice:C} ({availablePlants[i].City}).");
+    }
+
+    string? choice = null;
+
+    while (choice != "0")
+    {
+        Console.WriteLine(@$"Select an option:
+                        0. Exit
+                        1. Adopt a plant
+                        ");
+        choice = Console.ReadLine();
+        Console.WriteLine($"\n Press any key to continue...");
+        Console.ReadKey();
+
+        try
+        {
+            switch (choice)
+            {
+                case "0":
+                    Console.Clear();
+                    Console.WriteLine("Main Menu");
+                    break;
+
+                case "1":
+
+                    Console.Clear();
+
+                    Console.WriteLine("Enter the number of the plant you would like to adopt:");
+                    for (int i = 0; i < availablePlants.Count; i++)
+                    {
+                        Console.WriteLine($"{i + 1}. {availablePlants[i].Species}, Cost: {availablePlants[i].AskingPrice:C} ({availablePlants[i].City}).");
+                    }
+                    int plantChoice = int.Parse(Console.ReadLine());
+                    availablePlants[plantChoice - 1].Sold = true;
+                    Console.WriteLine($"{availablePlants[plantChoice - 1].Species} has been adopted!");
+                    break;
+
+                default:
+                    Console.Clear();
+                    Console.WriteLine($"Invalid Choice: {choice} \nPlease select an option below \n");
+
+                    for (int i = 0; i < availablePlants.Count; i++)
+                    {
+                        Console.WriteLine($"{i + 1}. {availablePlants[i].Species}, Cost: {availablePlants[i].AskingPrice:C} ({availablePlants[i].City}).");
+                    }
+                    break;
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+    }
+
+
+}
+
+
+{
+
+
+    // Console.Clear();
+    // throw new NotImplementedException("Adopt a plant \n");
 }
 
 void DelistPlant()
