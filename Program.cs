@@ -1,5 +1,6 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using System.Linq.Expressions;
+using System.Text;
 
 List<Plant> plants = new List<Plant>()
 {
@@ -28,7 +29,7 @@ while (choice != "e")
     e. Exit");
 
     choice = Console.ReadLine();
-    Console.WriteLine(@$"Press any key to continue...");
+    Console.WriteLine($"\n Press any key to continue...");
     Console.ReadKey();
 
     // used try block to handle choice logic and catch block to handle exception
@@ -79,16 +80,77 @@ Please select an option below
 
 void AllPlants()
 {
-    // TODO: Implement feature to display all plants.
     Console.Clear();
-    throw new NotImplementedException("Display all plants \n");
+    // TODO: Implement feature to display all plants.
+    //list all plants 1 per line
+    /*
+    <Number>. <Name of Plant> in <City> <is available/was sold> for <Price> dollars
+        Examples: 
+        1. Ficus in Pasadena was sold for 15 dollars
+        2. Hydrangea in Walla Walla is available for 25 dollars
+    */
+    for (int i = 0; i < plants.Count; i++)
+    {
+        Console.WriteLine($"{i + 1}. {plants[i].Species} in {plants[i].City} {(plants[i].Sold ? "was sold for" : "is available for")} {plants[i].AskingPrice:C} dollars");
+    }
 }
 
 void PostPlant()
 {
-    // TODO: Implement feature to post a plant for adoption.
     Console.Clear();
-    throw new NotImplementedException("Post a plant to be adopted \n");
+    /*
+            - user input for plant details using Console.ReadLine();
+                string  - Species = "Monstera", 
+                int     - LightNeeds = 2, 
+                decimal - AskingPrice = 50.00M, 
+                string  - City = "Seattle", 
+                int     - ZIP = 37209, 
+                bool    - Sold = false
+            - after all details are entered, add the plant to the list of plants
+            - add() method to add a plant to the list of plants
+    */
+    // TODO: Implement feature to post a plant for adoption.
+    string? species = null;
+    int lights = 0;
+    decimal price = 0;
+    string? city = null;
+    int zipCode = 0;
+
+
+    Console.WriteLine("Enter the plant species:");
+    species = Console.ReadLine();
+
+    Console.Clear();
+    Console.WriteLine("Enter the light needs: 1-5: 1 being low, 5 being high:");
+
+    lights = int.Parse(Console.ReadLine());
+
+    Console.Clear();
+    Console.WriteLine("Enter the asking price:");
+    price = decimal.Parse(Console.ReadLine());
+
+    Console.Clear();
+    Console.WriteLine("Enter the city:");
+    city = Console.ReadLine();
+
+    Console.Clear();
+    Console.WriteLine("Enter the ZIP code:");
+    zipCode = int.Parse(Console.ReadLine());
+
+    Plant newPlant = new Plant { Species = species, LightNeeds = lights, AskingPrice = price, City = city, ZIP = zipCode, Sold = false };
+
+
+    // Console.WriteLine("Has the plant been sold? True or False:");
+    // Sold = Console.ReadLine();
+    Console.Clear();
+    Console.WriteLine(newPlant);
+    Console.WriteLine($"\n Press any key to continue...");
+    Console.ReadKey();
+
+    plants.Add(newPlant);
+    Console.WriteLine("Plant added successfully!");
+    Console.Clear();
+
 }
 
 void AdoptPlant()
@@ -108,7 +170,7 @@ void DelistPlant()
 void ExitMenu()
 {
     Console.Clear(); // Clears the console
-    Console.WriteLine("Exiting in 3 seconds...");
-    Thread.Sleep(3000); // Wait for 3000 milliseconds (3 seconds)
+    Console.WriteLine("Exiting momentarily...");
+    Thread.Sleep(2000); // Wait for 3000 milliseconds (3 seconds)
     Console.Clear(); // Clears the console
 }
