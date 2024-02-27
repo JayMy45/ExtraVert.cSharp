@@ -1,6 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using System.Linq.Expressions;
 using System.Net;
+using System.Runtime.InteropServices;
 using System.Text;
 
 List<Plant> plants = new List<Plant>()
@@ -90,10 +91,13 @@ void AllPlants()
         1. Ficus in Pasadena was sold for 15 dollars
         2. Hydrangea in Walla Walla is available for 25 dollars
     */
+    Console.WriteLine("All Plants: \n");
+
     for (int i = 0; i < plants.Count; i++)
     {
         Console.WriteLine($"{i + 1}. {plants[i].Species} in {plants[i].City} {(plants[i].Sold ? "was sold for" : "is available for")} {plants[i].AskingPrice:C} dollars");
     }
+    Console.WriteLine("\n");
 }
 
 void PostPlant()
@@ -187,59 +191,36 @@ void AdoptPlant()
         Console.WriteLine($"{i + 1}. {availablePlants[i].Species}, Cost: {availablePlants[i].AskingPrice:C} ({availablePlants[i].City}).");
     }
 
-    string? choice = null;
+    Console.Clear();
 
-    while (choice != "0")
+    Console.WriteLine("Enter the number of the plant you would like to adopt: \n");
+    for (int i = 0; i < availablePlants.Count; i++)
     {
-        Console.WriteLine(@$"Select an option:
-                        0. Exit
-                        1. Adopt a plant
-                        ");
-        choice = Console.ReadLine();
-        Console.WriteLine($"\n Press any key to continue...");
-        Console.ReadKey();
-
-        try
-        {
-            switch (choice)
-            {
-                case "0":
-                    Console.Clear();
-                    Console.WriteLine("Main Menu");
-                    break;
-
-                case "1":
-
-                    Console.Clear();
-
-                    Console.WriteLine("Enter the number of the plant you would like to adopt:");
-                    for (int i = 0; i < availablePlants.Count; i++)
-                    {
-                        Console.WriteLine($"{i + 1}. {availablePlants[i].Species}, Cost: {availablePlants[i].AskingPrice:C} ({availablePlants[i].City}).");
-                    }
-                    int plantChoice = int.Parse(Console.ReadLine());
-                    availablePlants[plantChoice - 1].Sold = true;
-                    Console.WriteLine($"{availablePlants[plantChoice - 1].Species} has been adopted!");
-                    break;
-
-                default:
-                    Console.Clear();
-                    Console.WriteLine($"Invalid Choice: {choice} \nPlease select an option below \n");
-
-                    for (int i = 0; i < availablePlants.Count; i++)
-                    {
-                        Console.WriteLine($"{i + 1}. {availablePlants[i].Species}, Cost: {availablePlants[i].AskingPrice:C} ({availablePlants[i].City}).");
-                    }
-                    break;
-            }
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine(ex.Message);
-        }
+        Console.WriteLine($"{i + 1}. {availablePlants[i].Species}, Cost: {availablePlants[i].AskingPrice:C} ({availablePlants[i].City}).");
     }
 
-
+    try
+    {
+        int plantChoice = int.Parse(Console.ReadLine());
+        availablePlants[plantChoice - 1].Sold = true;
+        Console.Clear();
+        Console.WriteLine($"{availablePlants[plantChoice - 1].Species} has been adopted!");
+        Console.WriteLine($"\n Back to Main Menu... \n");
+        Thread.Sleep(2000); // Wait for 2000 milliseconds (2 seconds)
+        Console.Clear(); // Clears the console
+    }
+    catch (FormatException)
+    {
+        Console.WriteLine("Do Better pimpin");
+    }
+    catch (ArgumentOutOfRangeException)
+    {
+        Console.WriteLine("Invalid input, please enter a number between 1 and 4: ");
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine(ex.Message);
+    }
 }
 
 
@@ -252,9 +233,52 @@ void AdoptPlant()
 
 void DelistPlant()
 {
-    // TODO: Implement feature to delist a plant.
+
+    /*
+        Provide a list of available plants
+        Allow user to select a plant to delist via int and Console.ReadLine()
+        remove plant from list using removeAt() method
+        Display a message that the plant has been removed
+        catch exceptions
+    */
+    // use AllPlant() to display all plants
     Console.Clear();
-    throw new NotImplementedException("Delist a plant \n");
+    Console.WriteLine("Enter the number of the plant you would like to REMOVE: \n");
+
+    for (int i = 0; i < plants.Count; i++)
+    {
+        Console.WriteLine($"{i + 1}. {plants[i].Species} in {plants[i].City} {(plants[i].Sold ? "was sold for" : "is available for")} {plants[i].AskingPrice:C} dollars");
+    }
+    Console.WriteLine("\n");
+
+    try
+    {
+        int plantChoice = int.Parse(Console.ReadLine());
+        // Store species name before removal for message display
+        var removedSpecies = plants[plantChoice - 1].Species;
+        plants.RemoveAt(plantChoice - 1);
+        Console.Clear();
+        Console.WriteLine($"{removedSpecies} has been removed...");
+        Console.WriteLine($"\n Back to Main Menu... \n");
+        Thread.Sleep(2000); // Wait for 2000 milliseconds (2 seconds)
+        Console.Clear(); // Clears the console
+    }
+    catch (FormatException)
+    {
+        Console.WriteLine("Do Better pimpin");
+    }
+    catch (ArgumentOutOfRangeException)
+    {
+        Console.WriteLine($"Invalid input, please enter a number between 1 and {plants.Count}: ");
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine(ex.Message);
+    }
+
+    // TODO: Implement feature to delist a plant.
+    // Console.Clear();
+    // throw new NotImplementedException("Delist a plant \n");
 }
 
 void ExitMenu()
