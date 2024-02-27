@@ -6,4 +6,9 @@ public class Plant
     public string? City { get; set; }
     public int ZIP { get; set; }
     public bool Sold { get; set; }
+
+    public override string ToString()
+    {
+        return $"Species: {Species}, Light Needs: {LightNeeds}, Asking Price: {AskingPrice}, City: {City}, ZIP: {ZIP}, Sold: {Sold}";
+    }
 }
